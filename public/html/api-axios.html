@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/all.min.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<script src="../js/polyfill.min.js"></script>
+	<script src="../js/axios.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<button id="bt-post" class="btn btn-primary">데이터 내보내기-POST</button>
+		<button id="bt-get" class="btn btn-primary">데이터 내보내기-GET</button>
+	</div>
+	<script>
+		document.querySelector("#bt-post").addEventListener("click", function(){
+			axios.post('/api/save', {name: "홍길동", age: 25})
+			.then(function(r){ // 성공하면 실행
+				console.log(r.data) 
+			})
+			.catch(function(e){ // 실패하면 실행
+				console.log(e) 
+			})
+			.finally(function(){ // 성공하든 실패하든 실행 (생략가능)
+				console.log('finally') 
+			});
+		});
+
+		document.querySelector("#bt-get").addEventListener("click", function(){
+			axios.get('/api/save', { params: {name: "홍길동", age: 25} })
+			.then(function(r){ console.log(r.data) })
+			.catch(function(e){ console.log(e) })
+			.finally(function(){ console.log('finally') });
+		});
+	</script>
+</body>
+</html>
